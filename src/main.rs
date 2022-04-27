@@ -27,7 +27,7 @@ fn main() {
 
     let mut rng = rand::thread_rng();
     let random_point: (f32,f32) = (rng.gen_range(0.0..1000.0), rng.gen_range(0.0..1000.0));
-    let random_triangle_point = rng.gen_range(1..3);
+    let random_triangle_point = rng.gen_range(1..4);
 
     let active_point: (f32, f32) = if random_triangle_point == 1 {
        LEFT_POINT 
@@ -41,10 +41,10 @@ fn main() {
     {
     let midpoint: (f32,f32) = ((active_point.0 + random_point.0)/2.0,(active_point.1 + random_point.1)/2.0);
 
-    let draw_random_point = Drawing::new().with_shape(Shape::Rectangle { width: 1, height: 1 })
-        .with_xy(random_point.0, random_point.1)
-        .with_style(Style::filled(Color::black()));
-        canvas.display_list.add(draw_random_point);
+    // let draw_random_point = Drawing::new().with_shape(Shape::Rectangle { width: 1, height: 1 })
+    //     .with_xy(random_point.0, random_point.1)
+    //     .with_style(Style::filled(Color::black()));
+    //     canvas.display_list.add(draw_random_point);
 
     let draw_midpoint = Drawing::new().with_shape(Shape::Rectangle { width: 1, height: 1 })
         .with_xy(midpoint.0, midpoint.1)
@@ -56,7 +56,7 @@ fn main() {
     }
 render::save(
     &canvas,
-    "tests/svg/basic_end_to_end.svg",
+    "tests/svg/tri_force.svg",
     SvgRenderer::new(),
     ).expect("Failed to save");
 
