@@ -8,6 +8,7 @@ fn main() {
     const MID_POINT: (f32, f32) = (500.0, 100.0);
 
     let mut n = 0;
+    let mut next_point: (f32, f32) = (0.0,0.0);
     while n < 500001 {
 
         let mut rng = rand::thread_rng();
@@ -23,9 +24,19 @@ fn main() {
        
         if is_inside(LEFT_POINT, RIGHT_POINT, MID_POINT, random_point)
         {
-        let midpoint: (f32,f32) = (
+        let midpoint: (f32,f32) = if n < 1 {
+            (
             (active_point.0 + random_point.0)/2.0,
-            (active_point.1 + random_point.1)/2.0);
+            (active_point.1 + random_point.1)/2.0
+            )
+        } else {
+
+            (
+            (active_point.0 + next_point.0)/2.0,
+            (active_point.1 + next_point.1)/2.0
+            )
+        };
+        next_point = midpoint;
 
         let draw_midpoint = Drawing::new().with_shape(Shape::Rectangle { width: 1, height: 1 })
             .with_xy(midpoint.0, midpoint.1)
